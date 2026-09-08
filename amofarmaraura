@@ -1,0 +1,64 @@
+class DispositivoRede:
+    def __init__(self, ip, hostname, ativo):
+        self.ip = ip
+        self.hostname = hostname
+        self.ativo = ativo
+
+    def verificar_status(self):
+        if self.ativo:
+            status = "ONLINE"
+        else:
+            status = "OFFLINE"
+        return "Dispositivo " + self.hostname + " — IP: " + self.ip + " — Status: " + status
+
+
+class Servidor(DispositivoRede):
+    def __init__(self, ip, hostname, ativo, sistema_operacional):
+        super().__init__(ip, hostname, ativo)
+        self.sistema_operacional = sistema_operacional
+
+    def verificar_status(self):
+        if self.ativo:
+            status = "ONLINE"
+        else:
+            status = "OFFLINE"
+        return "Servidor " + self.hostname + " — IP: " + self.ip + " — Status: " + status
+
+
+class Roteador(DispositivoRede):
+    def __init__(self, ip, hostname, ativo, numero_portas):
+        super().__init__(ip, hostname, ativo)
+        self.numero_portas = numero_portas
+
+    def verificar_status(self):
+        if self.ativo:
+            status = "ONLINE"
+        else:
+            status = "OFFLINE"
+        return "Roteador " + self.hostname + " — IP: " + self.ip + " — Status: " + status
+
+
+class Switch(DispositivoRede):
+    def __init__(self, ip, hostname, ativo, velocidade_portas):
+        super().__init__(ip, hostname, ativo)
+        self.velocidade_portas = velocidade_portas
+
+    def verificar_status(self):
+        if self.ativo:
+            status = "ONLINE"
+        else:
+            status = "OFFLINE"
+        return "Switch " + self.hostname + " — IP: " + self.ip + " — Status: " + status
+
+
+dispositivos = [
+    Servidor("192.168.0.10", "SRV-WEB", True, "Ubuntu"),
+    Servidor("192.168.0.11", "SRV-DB", False, "Windows Server"),
+    Roteador("192.168.0.1", "RTR-01", True, 8),
+    Roteador("192.168.0.2", "RTR-02", True, 4),
+    Switch("192.168.0.20", "SW-01", True, "1 Gbps"),
+    Switch("192.168.0.21", "SW-02", False, "10 Gbps"),
+]
+
+for dispositivo in dispositivos:
+    print(dispositivo.verificar_status())
